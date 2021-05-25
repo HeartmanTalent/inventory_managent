@@ -1,0 +1,188 @@
+{% extends 'modal_base.html' %}
+{% load static %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-info-mi">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dashboard' %}"> <b class="nav-ta">Dashboard</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'item_index' %}"> <b class="nav-ta">Items</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'store_index' %}"><b class="nav-ta">Store Rooms</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'outlet_index' %}"> <b class="nav-ta">Outlets</b></a>
+                </li>
+                {% if perms.main.view_supplier %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'supplier_index' %}"><b class="nav-ta">Suppliers</b></a>
+                </li>
+                {% endif %}
+                {% if perms.main.view_dispatch %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'analysis' %}"> <b class="nav-ta">Reports</b></a>
+                </li>
+                {% endif %}
+                {% if perms.main.view_user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user_index' %}"><b class="nav-ta">Users</b></a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <strong class="nav-ta"><span data-toggle="tooltip" title="{{user}} logged in"><i
+                                class="material-icons">face</i></span></strong>
+                </a>
+                <div class="dropdown-menu bg-info-mi" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="btn btn-info-mi" href="{% url 'logout' %}" style="width:100%;"><b class="nav-ta">Logout</b></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="dashboard-mi">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4 ">
+            <a class="a-mi" href="{% url 'item_index' %}">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title"><b class="nav-ta">Items</b></h4>
+                        <p class="category"></p>
+                    </div>
+                    <div class="card-body">
+                        To get information about your Inventory
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a class="a-mi" href="{% url 'outlet_index' %}">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title"><b class="nav-ta">Outlets</b></h4>
+                        <p class="category"></p>
+                    </div>
+                    <div class="card-body">
+                        To get information about your Outlets click
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        {% if perms.main.view_dispatch %}
+        <div class="col-md-4">
+            <a class="a-mi" href="{% url 'analysis' %}">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title"><b class="nav-ta">Reports</b></h4>
+                        <p class="category"></p>
+                    </div>
+                    <div class="card-body">
+                        Reports and graphical analysis
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+        {% if perms.main.view_user %}
+        <div class="col-md-4">
+            <a class="a-mi" href="{% url 'user_index' %}">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title"><b class="nav-ta">Users</b></h4>
+                        <p class="category"></p>
+                    </div>
+                    <div class="card-body">
+                        To get information about your Users click
+
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+        <div class="col-md-2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4 ">
+            <a class="a-mi" href="{% url 'purchase' %}">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title"><b class="nav-ta">Purchase</b></h4>
+                        <p class="category"></p>
+                    </div>
+                    <div class="card-body">
+                        Restocking
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a class="a-mi" href="{% url 'dispatch' %}">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title"><b class="nav-ta">Dispatch</b></h4>
+                        <p class="category"></p>
+                    </div>
+                    <div class="card-body">
+                        Checking out
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4 ">
+            <a class="a-mi" href="{% url 'supplier_index' %}">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title"><b class="nav-ta">Supplier</b></h4>
+                        <p class="category"></p>
+                    </div>
+                    <div class="card-body">
+                        Restocking and checking out
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 ">
+            <a class="a-mi" href="{% url 'store_index' %}">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title"><b class="nav-ta">Store Rooms</b></h4>
+                        <p class="category"></p>
+                    </div>
+                    <div class="card-body">
+                        To get information about your Store Rooms click
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+{% endblock %}

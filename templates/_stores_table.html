@@ -1,0 +1,47 @@
+<div class="table-mi">
+  <table id="books-table" class="table table-shopping">
+    <thead>
+      <tr>
+        <th> #</th>
+        <th> Name</th>
+        <th> Information</th>
+        <th> Address</th>
+        <th> Date Added</th>
+        <th> Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for store in stores %}
+      <tr>
+        <th scope="row">{{ store.id }}</th>
+        <td>{{ store.name }}</td>
+        <td>{{ store.description }}</td>
+        <td>{{ store.address}}</td>
+        <td>{{ store.date_added}}</td>
+        <td>
+          
+          <!-- Read store buttons -->
+          <button type="button" class="bs-modal read-book btn btn-sm btn-success"
+            data-form-url="{% url 'read_store' store.id %}">
+            <span class="fa fa-eye"></span>
+          </button>
+          {% if perms.main.change_store %}
+          <!-- Update store buttons -->
+          <button type="button" class="update-book btn btn-sm btn-info-mi"
+            data-form-url="{% url 'update_store' store.id %}">
+            <span class="fa fa-pencil"></span>
+          </button>
+          {% endif %}
+          {% if perms.main.delete_store %}
+          <!-- Delete store buttons -->
+          <button type="button" class="bs-modal delete-book btn btn-sm btn-danger"
+            data-form-url="{% url 'delete_store' store.id %}">
+            <span class="fa fa-trash"></span>
+          </button>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

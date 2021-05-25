@@ -1,0 +1,44 @@
+{% load widget_tweaks %}
+
+<div class="modal-header">
+  <h3 class="modal-title">User details</h3>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <div class="">
+    First Name:
+    {{ user.first_name }}
+  </div>
+  <div class="">
+    Last Name:
+    {{ user.last_name }}
+  </div>
+  <div class="">
+    Gender:
+    {{ user.gender }}
+  </div>
+  <div class="">
+    Store:
+    {{ user.store}}
+  </div>
+  <div class="">
+    Date Joined:
+    {{ user.date_joined }}
+  </div>
+  <div class="">
+    Active:
+    {{ user.is_active }}
+  </div>
+  <div class="">
+    Staff:
+    {{ user.is_staff }}
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-info-mi" data-dismiss="modal">Close</button>
+</div>

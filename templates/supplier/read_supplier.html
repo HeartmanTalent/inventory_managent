@@ -1,0 +1,39 @@
+{% load widget_tweaks %}
+
+<div class="modal-header">
+  <h3 class="modal-title">Supplier Details</h3>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <div class="form-row mt-5">
+    <div class="col">
+      <label>Name:</label>
+    </div>
+    <div class="col">
+      {{supplier.name}}
+    </div>
+  </div>
+  <div class="form-row mt-5">
+    <div class="col">
+      <label>Email:</label>
+    </div>
+    <div class="col">
+      {{supplier.email}}
+    </div>
+  </div>
+  <div class="form-row mt-5">
+    <div class="col">
+      <label>Address</label>
+    </div>
+    <div class="col">
+      {{supplier.address}}
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info-mi" data-dismiss="modal">Close</button>
+  </div>

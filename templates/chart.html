@@ -1,0 +1,207 @@
+{% extends 'modal_base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include "_modal.html" %}
+<nav class="navbar navbar-expand-lg bg-info-mi">
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboard' %}"> <b class="nav-ta">Dashboard</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'item_index' %}"> <b class="nav-ta">Items</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store_index' %}"><b class="nav-ta">Store Rooms</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'outlet_index' %}"> <b class="nav-ta">Outlets</b></a>
+        </li>
+        {% if perms.main.view_supplier %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'supplier_index' %}"><b class="nav-ta">Suppliers</b></a>
+        </li>
+        {% endif %}
+        {% if perms.main.view_dispatch %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'analysis' %}"> <b class="nav-ta">Reports</b></a>
+        </li>
+        {% endif %}
+        {% if perms.main.view_user %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user_index' %}"><b class="nav-ta">Users</b></a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <strong class="nav-ta"><span data-toggle="tooltip" title="{{user}} logged in"><i
+                class="material-icons">face</i></span></strong>
+        </a>
+        <div class="dropdown-menu bg-info-mi" aria-labelledby="navbarDropdownMenuLink">
+          <a class="btn btn-info-mi" href="{% url 'logout' %}" style="width:100%;"><b class="nav-ta">Logout</b></a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+      <canvas id="myChart" width="40" height="40">
+
+      </canvas>
+      <canvas id="bar-chart-grouped" width="2500" height="2000"></canvas>
+
+    </div>
+    <div class="table-responsive">
+      <h3 class="text-center">Reports</h3>
+      <div class="form-row text-center">
+      </div>
+
+
+      <div class="col-12 mb-3">
+        <div class="row mt-1">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-8">
+            <form method="post" action="{% url 'analysis' %}">
+              {% csrf_token %}
+              <div class="form-check form-check-inline">
+                <label>Duration </label>
+                <div class="mr-3"></div>
+                <select name='period' class="form-control form-select-lg mr-3" aria-label=".form-select-sm example">
+                  <option value="1" selected>Last 24 Hrs</option>
+                  <option value="7">Last 7 Days</option>
+                  <option value="30">Last Month</option>
+                  <option value="365">Last Year</option>
+                </select>
+                <div class="mr-3"></div>
+                <label>Transaction Type </label>
+                <div class="mr-3"></div>
+                <select name='type' class="form-control form-select-lg mr-3 " aria-label=".form-select-sm example">
+                  <option value="all" selected>All</option>
+                  <option value="dispatch">Dispatch</option>
+                  <option value="purchase">Purchase</option>
+                </select>
+                <div class="mr-3"></div>
+                <button class="btn btn-info-mi btn-round">
+                  <i class="material-icons">filter_list</i> Filter
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="table-mi mt-5">
+          <table id="books-table" class="table table-shopping">
+            <thead>
+              <tr>
+                <th>Date Of Transaction</th>
+                <th>Store</th>
+                <th>Proccessed By </th>
+                <th>Item</th>
+                <th>Initial Quantity</th>
+                <th>Transaction Quantity</th>
+                <th>New Quantity</th>
+                <th>Transaction Value</th>
+                <th>Transaction Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for transaction in transactions %}
+              <tr>
+                <td>{{transaction.date}}</td>
+                <td>{{transaction.store}}</td>
+                <td>{{transaction.user}}</td>
+                <td>{{transaction.item.title}}</td>
+                <td>{{transaction.initial_quatity}}</td>
+                <td>{{transaction.quantity}}</td>
+                <td>{{transaction.new_quatity}}</td>
+                <td>R {{transaction.money_value}}</td>
+                <td>{{transaction.transaction_type}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% block extrascripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script>
+  var endpoint = "{% url 'plot'  %}"
+  $.ajax
+    ({
+      type: "GET",
+      url: endpoint,
+      success: function (data) {
+        var labels = []
+        var quantity = []
+        var re_order_level = []
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        data.map(data => {
+          labels.push(data.title)
+        })
+        data.map(data => {
+          quantity.push(data.quantity)
+        })
+        data.map(data => {
+          re_order_level.push(data.re_order_level)
+        })
+        new Chart(document.getElementById("bar-chart-grouped"), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Available Quantity",
+                backgroundColor: "#8e5ea2",
+                data: quantity
+              },
+              {
+                label: "Re-Order Level",
+                backgroundColor: "#3e95cd",
+                data: re_order_level
+              }
+            ]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            },
+            title: {
+              display: true,
+              text: 'Stock Quantity vs Re-Order Level '
+            }
+          }
+        });
+      },
+      error: function (data) {
+        console.log(data)
+      }
+    });
+
+
+</script>
+{% endblock extrascripts %}
+
+
+{% endblock %}

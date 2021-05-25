@@ -1,0 +1,32 @@
+{% load widget_tweaks %}
+
+<div class="modal-header">
+  <h3 class="modal-title">Outlet details</h3>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <div class="">
+    Name:
+    {{ outlet.name }}
+  </div>
+  <div class="">
+    Description:
+    {{ outlet.description }}
+  </div>
+  <div class="">
+    Address:
+    {{ outlet.address}}
+  </div>
+  <div class="">
+    Date Added:
+    {{ outlet.date_added }}
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-info-mi" data-dismiss="modal">Close</button>
+</div>
