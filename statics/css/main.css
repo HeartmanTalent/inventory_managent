@@ -1,0 +1,136 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i);
+/*** VARIABLES ***/
+/* Colors */
+/*** EXTEND ***/
+/* box-shadow */
+ol.gradient-list > li, ol.gradient-list > li::before {
+  box-shadow: 0.25rem 0.25rem 0.6rem rgba(0, 0, 0, 0.05), 0 0.5rem 1.125rem rgba(75, 0, 0, 0.05); }
+
+/*** STYLE ***/
+*,
+*:before,
+*:after {
+  box-sizing: border-box; }
+
+.login-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center; }
+
+.login-form {
+  margin-top: 40px;
+  padding: 30px;
+  width: 30%;
+  border: 3px solid #0d98ba; }
+
+.dashboard-container {
+  margin-right: 10px; }
+
+.bg-info-mi {
+  background-color: #0d98ba !important;
+  color: white; }
+
+.btn-info-mi {
+  background-color: #0d98ba !important;
+  color: white; }
+
+.card-header-info-mi {
+  background-color: #0d98ba !important;
+  color: black; }
+
+.badge-info-mi {
+  background-color: #0d98ba !important;
+  color: white; }
+
+.img-mi {
+  float: left;
+  width: 100px;
+  height: 100px;
+  -o-object-fit: stretch;
+     object-fit: stretch; }
+
+.modal-btn {
+  background: transparent;
+  border: none !important;
+  font-size: 0; }
+
+.form-row-mi {
+  margin-bottom: 20px; }
+
+.nav-ta {
+  color: black;
+  font-weight: bold; }
+
+.dashboard-mi {
+  margin-top: 65px; }
+
+.a-mi:hover {
+  text-decoration: none; }
+
+.table-mi {
+  margin-top: 40px; }
+
+.landing-mi-0 {
+  margin-top: 20px;
+  height: 60%; }
+
+html,
+body {
+  height: 100%; }
+
+ol.gradient-list {
+  counter-reset: gradient-counter;
+  list-style: none;
+  margin: 1.75rem 0;
+  padding-left: 1rem; }
+  ol.gradient-list > li {
+    background: white;
+    border-radius: 0 0.5rem 0.5rem 0.5rem;
+    counter-increment: gradient-counter;
+    margin-top: 1rem;
+    min-height: 3rem;
+    padding: 1rem 1rem 1rem 3rem;
+    position: relative; }
+    ol.gradient-list > li::before, ol.gradient-list > li::after {
+      background: linear-gradient(135deg, #83e4e2 0%, #56dbed 100%);
+      border-radius: 1rem 1rem 0 1rem;
+      content: "";
+      height: 3rem;
+      left: -1rem;
+      overflow: hidden;
+      position: absolute;
+      top: -1rem;
+      width: 3rem; }
+    ol.gradient-list > li::before {
+      align-items: flex-end;
+      content: counter(gradient-counter);
+      color: #1d1f20;
+      display: flex;
+      font: 900 1.5em/1 "Montserrat";
+      justify-content: flex-end;
+      padding: 0.125em 0.25em;
+      z-index: 1; }
+    ol.gradient-list > li:nth-child(10n + 1):before {
+      background: linear-gradient(135deg, rgba(86, 219, 237, 0.2) 0%, rgba(13, 152, 186, 0.2) 100%); }
+    ol.gradient-list > li:nth-child(10n + 2):before {
+      background: linear-gradient(135deg, rgba(86, 219, 237, 0.4) 0%, rgba(13, 152, 186, 0.4) 100%); }
+    ol.gradient-list > li:nth-child(10n + 3):before {
+      background: linear-gradient(135deg, rgba(86, 219, 237, 0.6) 0%, rgba(13, 152, 186, 0.6) 100%); }
+    ol.gradient-list > li:nth-child(10n + 4):before {
+      background: linear-gradient(135deg, rgba(86, 219, 237, 0.8) 0%, rgba(13, 152, 186, 0.8) 100%); }
+    ol.gradient-list > li:nth-child(10n + 5):before {
+      background: linear-gradient(135deg, #56dbed 0%, #0d98ba 100%); }
+    ol.gradient-list > li:nth-child(10n + 6):before {
+      background: linear-gradient(135deg, rgba(86, 219, 237, 0.8) 0%, rgba(13, 152, 186, 0.8) 100%); }
+    ol.gradient-list > li:nth-child(10n + 7):before {
+      background: linear-gradient(135deg, rgba(86, 219, 237, 0.6) 0%, rgba(13, 152, 186, 0.6) 100%); }
+    ol.gradient-list > li:nth-child(10n + 8):before {
+      background: linear-gradient(135deg, rgba(86, 219, 237, 0.4) 0%, rgba(13, 152, 186, 0.4) 100%); }
+    ol.gradient-list > li:nth-child(10n + 9):before {
+      background: linear-gradient(135deg, rgba(86, 219, 237, 0.2) 0%, rgba(13, 152, 186, 0.2) 100%); }
+    ol.gradient-list > li:nth-child(10n + 10):before {
+      background: linear-gradient(135deg, rgba(86, 219, 237, 0) 0%, rgba(13, 152, 186, 0) 100%); }
+    ol.gradient-list > li + li {
+      margin-top: 2rem; }
+
+/*# sourceMappingURL=main.css.map */

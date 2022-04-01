@@ -1,4 +1,4 @@
-FROM python:3.7-slim
+FROM python:3.8.3-slim-buster
 
 ENV PYTHONUNBUFFERED 1
 ENV DJANGO_ENV dev
@@ -11,7 +11,6 @@ RUN apt-get install -y python3-dev libffi-dev libpq-dev gcc && pip3 install --up
 RUN apt-get install -y netcat
 
 COPY ./requirements.txt /requirements.txt
-COPY ./fixtures/initial_data.yaml /initial_data.yaml
 RUN pip3 install --default-timeout=100  -r /requirements.txt
 
 # Setup directory structure
