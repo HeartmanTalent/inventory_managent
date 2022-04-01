@@ -1,29 +1,34 @@
 FROM python:3.8.3-slim-buster
 
-ENV PYTHONUNBUFFERED 1
-ENV DJANGO_ENV dev
-
-# install dependencies
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y procps
-RUN apt-get install -y python3-dev libffi-dev libpq-dev gcc && pip3 install --upgrade pip
-RUN apt-get install -y netcat
-
-COPY ./requirements.txt /requirements.txt
-RUN pip3 install --default-timeout=100  -r /requirements.txt
-
-# Setup directory structure
-RUN mkdir -p /usr/src/app
+# set work directory
 WORKDIR /usr/src/app
 
-# add entrypoint.sh
-COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+# install psycopg2 dependencies
+RUN apt-get update \
+    && apt-get -y install libpq-dev gcc \
+    && pip install psycopg2
+RUN apt install -y netcat
+
+# install dependencies
+# RUN pip install --upgrade pip
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+# copy entrypoint.sh
+COPY ./entrypoint.sh .
+
+# copy project
+COPY . .
+RUN chmod 755 /usr/src/app/entrypoint.sh
+# run entrypoint.sh
 ENTRYPOINT ["sh", "/usr/src/app/entrypoint.sh"]
 
 COPY . /usr/src/app
 
 # run server
 CMD ["/usr/src/app/entrypoint.sh"]
+
 
 
