@@ -17,4 +17,4 @@ fi
 # ./manage.py loaddata initial_data
 ./manage.py collectstatic --no-input --clear
 # gunicorn easylocum.wsgi:application --bind 0.0.0.0:8000 --workers 3
-./manage.py runserver 0.0.0.0:8000
+./manage.py runserver 0.0.0.0:8001
